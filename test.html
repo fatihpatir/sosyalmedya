@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nene Hatun MTAL - Sosyal Medya Testi</title>
+    <style>
+        :root { --bg: #0f172a; --card-bg: #ffffff; --primary: #6366f1; --success: #22c55e; --error: #ef4444; --text: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: white; margin: 0; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        header { text-align: center; padding: 15px; background: rgba(255, 255, 255, 0.05); width: 100%; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; }
+        .back-btn { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 8px 15px; border-radius: 10px; text-decoration: none; font-size: 0.9rem; }
+        .container { width: 95%; max-width: 650px; flex-grow: 1; margin-top: 20px; }
+        .quiz-card { background: var(--card-bg); color: var(--text); padding: 25px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .option { background: #f1f5f9; padding: 14px; border-radius: 12px; margin-top: 10px; cursor: pointer; transition: 0.2s; font-weight: 500; border: 2px solid transparent; }
+        .option:hover { border-color: var(--primary); }
+        .option.correct { background: var(--success) !important; color: white; }
+        .option.wrong { background: var(--error) !important; color: white; }
+        .stats { display: flex; justify-content: space-between; margin-bottom: 10px; font-weight: bold; }
+        button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 10px 20px; border-radius: 10px; cursor: pointer; }
+        .btn-on { background: #22c55e !important; }
+        footer { padding: 15px; text-align: center; background: rgba(0,0,0,0.2); width: 100%; margin-top: auto; }
+        footer a { color: var(--primary); text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="back-btn">⬅ Geri</a>
+        <div style="font-size: 1.2rem; font-weight: bold;">Sosyal Medya Bilgi Testi</div>
+    </header>
+
+    <div class="container">
+        <div id="quiz">
+            <div class="stats">
+                <span id="q-info">Soru: 1 / 81</span>
+                <button id="vBtn" onclick="toggleV()" style="font-size:0.8rem;">🔇 Ses: Kapalı</button>
+            </div>
+            <div class="quiz-card">
+                <div id="question" style="font-weight:bold; font-size:1.1rem; margin-bottom:15px; line-height:1.4;">Yükleniyor...</div>
+                <div id="options"></div>
+            </div>
+        </div>
+        <div id="result" style="display:none; text-align:center;">
+            <h1>Sınav Bitti!</h1>
+            <div id="finalScore" style="font-size:4rem; color:var(--primary); font-weight:800;">0</div>
+            <button onclick="location.reload()" style="background:var(--primary); padding:15px 40px; margin-top:20px;">Tekrar Başla</button>
+        </div>
+    </div>
+
+    <footer>Hazırlayan: <a href="https://fatihpatir.github.io/web" target="_blank">Fatih PATIR</a></footer>
+
+    <script>
+        // Buradaki dizi flashcard.html ile aynı 81 soruyu içerir.
+        const allQuestions = [
+            ["E-ticaret kavramının en temel tanımı nedir?", "Mal ve hizmetlerin internet üzerinden alım satımı yapılmasıdır."],
+            ["E-ticaretin fiziksel mağazacılığa göre en büyük avantajlarından biri nedir?", "Mekân sınırlaması olmaksızın 7/24 satış imkânı sunmasıdır."],
+            ["E-ticaretin tüketiciler için dezavantajı sayılabilecek bir durum nedir?", "Ürüne fiziksel olarak dokunma veya deneme imkânının olmamasıdır."],
+            ["E-ticaret iş planı hazırlamanın temel amacı nedir?", "İşin hedeflerini, stratejilerini ve operasyonel adımlarını belirlemektir."],
+            ["Bir e-ticaret sitesinin teknik altyapısını oluşturan temel bileşenlerden biri nedir?", "Web barındırma (hosting) ve alan adı (domain) hizmetleridir."],
+            ["E-ticarette 'Hazır Yazılım Paketleri' kullanmanın avantajı nedir?", "Hızlı kurulum ve teknik destek imkânı sağlamasıdır."],
+            ["E-ticaret sitelerinde veri iletimini şifreleyerek güvenliği sağlayan protokol nedir?", "SSL (Secure Sockets Layer) sertifikası."],
+            ["E-ticarette karşılaşılan yaygın güvenlik tehditlerinden biri nedir?", "Kullanıcı verilerinin çalınması veya oltalama (phishing) saldırılarıdır."],
+            ["E-ticarette ödeme güvenliğini artırmak için kullanılan tek kullanımlık şifre sistemine ne ad verilir?", "3D Secure ödeme sistemi."],
+            ["E-ticarette müşteri siparişini verdikten sonra gerçekleşen lojistik sürece ne ad verilir?", "Tedarik ve kargo yönetimi."],
+            ["E-ticaretle ilgili hukuki düzenlemeler Türkiye'de hangi kanun kapsamında değerlendirilir?", "Elektronik Ticaretin Düzenlenmesi Hakkında Kanun."],
+            ["E-ticarette ürün fotoğraflarının kalitesi hangi süreci doğrudan etkiler?", "Satın alma kararı ve dönüşüm oranlarını."],
+            ["Veri analizi sonucunda elde edilen bulguların görselleştirilmesine ne ad verilir?", "Veri Görselleştirme."],
+            ["Sosyal medya etiğine göre, bir başkasının fotoğrafını izinsiz paylaşmak hangi hakkı ihlal eder?", "Özel hayatın gizliliği ve mahremiyet hakkını."],
+            ["E-ticaret sitelerinde 'Arama Motoru Optimizasyonu' (SEO) neden yapılır?", "Sitenin arama sonuçlarında üst sıralarda çıkarak organik trafik alması için."],
+            ["Hiyerarşik bir yapıda 'Güneş Işığı' grafiği ile 'Ağaç Haritası' arasındaki temel görsel fark nedir?", "Güneş Işığı dairesel halkalar kullanırken, Ağaç Haritası dikdörtgen alanlar kullanır."],
+            ["Bir şirketin sosyal medyadaki kriz anında sessiz kalması neden risklidir?", "Bilgi kirliliğinin artmasına ve marka itibarının daha fazla zarar görmesine yol açar."],
+            ["Veri toplarken 'etik' açıdan yapılması gereken en önemli işlem nedir?", "Kullanıcılardan aydınlatılmış onam almak."],
+            ["Radar grafiği diğer adıyla 'Örümcek Grafiği' hangi durumlarda etkisiz kalır?", "Çok fazla veri serisi veya değişken olduğunda grafik okunamaz hale gelir."],
+            ["E-ticarette 'Dropshipping' satış modelinin temel özelliği nedir?", "Stok tutmadan, gelen siparişi doğrudan tedarikçiye yönlendirerek yapılan satıştır."],
+            ["Hiyerarşik verilerin dikdörtgen alanlarla gösterildiği grafik türü hangisidir?", "Ağaç Haritası (Treemap)."],
+            ["Bir e-ticaret sitesinde kriz yönetimi planı ne zaman hazırlanmalıdır?", "Kriz ortaya çıkmadan önce, proaktif bir yaklaşımla hazırlanmalıdır."],
+            ["Sosyal medya platformlarında veri güvenliğini korumak için kullanıcılara önerilen en temel yöntem nedir?", "Güçlü ve benzersiz şifreler kullanmak ve iki aşamalı doğrulamayı aktif hale getirmek."],
+            ["Görsel hiyerarşide en önemli bilginin en dikkat çekici şekilde sunulması kuralına ne ad verilir?", "Görsel vurgu veya odak noktası oluşturma."],
+            ["Veri kümesindeki uç değerleri (aykırı veriler) göstermek için en uygun grafik türlerinden biri hangisidir?", "Kutu Grafiği (Box Plot)."],
+            ["E-ticarette müşteri sadakatini artırmak için kullanılan dijital pazarlama yöntemi nedir?", "E-posta pazarlaması ve kişiselleştirilmiş indirim kuponları."],
+            ["Hangi grafik türü bir bütünün parçalarını oranlayarak göstermek için tercih edilir?", "Pasta Grafiği veya Çörek Grafiği."],
+            ["Verilerin zaman içindeki değişimini veya eğilimini göstermek için hangi grafik kullanılır?", "Çizgi Grafiği."],
+            ["E-ticaret ekosisteminde 'B2C' modelinin açılımı nedir?", "Business to Consumer (İşletmeden Tüketiciye)."],
+            ["Etik değerlere aykırı olarak kullanıcıların verilerini izinsiz takip eden yazılımlara ne ad verilir?", "Casus Yazılım (Spyware)."],
+            ["Dijital dünyada kişisel verilerin korunmasıyla ilgili Türkiye'deki temel kanun hangisidir?", "Kişisel Verilerin Korunması Kanunu (KVKK)."],
+            ["Bir veri setindeki değişkenler arasındaki ilişkiyi (korelasyonu) göstermek için hangi grafik kullanılır?", "Saçılım Grafiği (Scatter Plot)."],
+            ["E-ticarette 'Sepet Terk Etme' oranı nedir?", "Müşterilerin ürünleri sepete ekleyip satın alma işlemini tamamlamadan siteden ayrılmasıdır."],
+            ["Kullanıcı deneyimi (UX) tasarımı bir e-ticaret sitesinde neyi amaçlar?", "Sitenin kolay kullanılabilir olmasını ve müşteri memnuniyetini artırmayı."],
+            ["Sosyal medyada 'Trol' olarak adlandırılan hesapların temel amacı nedir?", "Tartışma çıkarmak, insanları kışkırtmak ve bilgi kirliliği yaymak."],
+            ["E-ticarette geri iade süreçlerinin şeffaf olması neyi güçlendirir?", "Müşteri güvenini."],
+            ["Veri görselleştirmede renk kullanımının temel amacı ne olmalıdır?", "Bilgiyi daha anlaşılır kılmak ve önemli verileri gruplandırmak."],
+            ["E-ticaret sitelerinde 'Canlı Destek' (Chatbot) kullanımının faydası nedir?", "Müşteri sorularına anlık cevap vererek satış ihtimalini artırmak."],
+            ["Dijital ayak izi nedir?", "İnternet ortamında yapılan her türlü işlem sonrası bırakılan izlerdir."],
+            ["Bir e-ticaret sitesinde 'Hakkımızda' sayfası neden önemlidir?", "Markanın güvenilirliğini ve şeffaflığını göstermek için."],
+            ["Mobil uyumlu (Responsive) tasarım nedir?", "Web sitesinin tüm cihaz ekranlarına (telefon, tablet, bilgisayar) otomatik uyum sağlamasıdır."],
+            ["İnternet üzerinden yapılan alışverişlerde 'Mesafeli Satış Sözleşmesi' ne zaman onaylanır?", "Ödeme aşamasından hemen önce."],
+            ["Veri okuryazarlığı nedir?", "Veriyi okuma, anlama, analiz etme ve etik bir şekilde kullanma becerisidir."],
+            ["Sosyal medyada siber zorbalıkla karşılaşıldığında yapılması gereken ilk şey nedir?", "Zorbalık yapan hesabı engellemek ve platforma bildirmek."],
+            ["E-ticarette 'Omnichannel' pazarlama stratejisi nedir?", "Fiziksel ve dijital tüm kanalların entegre bir şekilde kullanılmasıdır."],
+            ["Bir veri tablosundaki satır ve sütunların kesiştiği her bir kutucuğa ne ad verilir?", "Hücre."],
+            ["Büyük Veri (Big Data) kavramı neyi ifade eder?", "Geleneksel yöntemlerle işlenemeyecek kadar büyük, karmaşık ve hızlı büyüyen verileri."],
+            ["E-ticarette 'Affiliate Marketing' (Satış Ortaklığı) nedir?", "Başkalarının ürünlerini tanıtarak yapılan her satıştan komisyon alma modelidir."],
+            ["Görsel tasarımdaki 'Denge' prensibi neyi ifade eder?", "Ögelerin görsel ağırlığının tasarımın geneline eşit şekilde dağıtılmasıdır."],
+            ["Phishing (Oltalama) saldırılarından korunmanın en etkili yolu nedir?", "Şüpheli linklere tıklamamak ve kurumsal olmayan adreslerden gelen e-postalara güvenmemek."],
+            ["E-ticaret sitelerinde 'Sıkça Sorulan Sorular' (SSS) bölümünün amacı nedir?", "Müşterilerin ortak sorunlarına hızlı çözümler sunarak destek yükünü azaltmak."],
+            ["Arama motorlarında reklam vererek en üst sırada çıkmaya ne ad verilir?", "SEM (Search Engine Marketing - Arama Motoru Pazarlaması)."],
+            ["Dijital pazarlamada 'Retargeting' (Yeniden Hedefleme) nedir?", "Sitenizi ziyaret eden ancak alışveriş yapmayan kullanıcılara reklamlarınızın tekrar gösterilmesidir."],
+            ["Veri görselleştirmede kullanılan 'Isı Haritası' (Heat Map) neyi gösterir?", "Verilerin yoğunluğunu veya web sitesindeki tıklanma bölgelerini renklerle gösterir."],
+            ["Sosyal medya bağımlılığını azaltmak için önerilen 'Dijital Detoks' nedir?", "Belirli bir süre teknolojik cihazlardan ve sosyal medyadan uzak durmaktır."],
+            ["E-ticarette 'C2C' modeline bir örnek veriniz?", "Sahibinden veya Gardrops gibi bireylerin birbirine satış yaptığı platformlar."],
+            ["Bir e-ticaret sitesinin yüklenme hızının yavaş olması neye seb olur?", "Müşterilerin siteyi terk etmesine ve satış kaybına."],
+            ["İnternet etiği (Netiket) nedir?", "İnternet ortamında uyulması gereken nezaket ve saygı kurallarıdır."],
+            ["Bulut Bilişim (Cloud Computing) avantajı nedir?", "Verilere her yerden, her cihazla erişim imkânı ve düşük maliyetli depolama sağlar."],
+            ["Sosyal medyada paylaşılan bilginin doğruluğunu kontrol etmeye ne ad verilir?", "Teyit etme (Fact-checking)."],
+            ["Veri görselleştirmede 'Yığılmış Sütun Grafiği' ne zaman kullanılır?", "Kategoriler içindeki alt kırılımları ve toplam değerleri bir arada göstermek için."],
+            ["E-ticarette 'Dönüşüm Oranı' (Conversion Rate) nedir?", "Siteyi ziyaret edenlerin kaçının satın alma işlemini gerçekleştirdiğini gösteren orandır."],
+            ["Kişisel verilerin ihlali durumunda şikayet edilebilecek kurum hangisidir?", "KVKK Kurumu (Kişisel Verileri Koruma Kurumu)."],
+            ["İnternet tarayıcılarının geçmişi ve tercihleri hatırlamak için kullandığı küçük dosyalara ne ad verilir?", "Çerez (Cookie)."],
+            ["E-ticarette 'Pazar Yeri' (Marketplace) modeli nedir?", "Farklı satıcıların ürünlerini tek bir platform üzerinden satabildiği sistemdir (Örn: Trendyol)."],
+            ["Dijital okuryazarlık nedir?", "Dijital teknolojileri güvenli, eleştirel ve etkili bir şekilde kullanabilme yeteneğidir."],
+            ["Sanal kart kullanmanın e-ticaretteki en büyük faydası nedir?", "Asıl kredi kartı limitinden bağımsız sadece alışveriş tutarı kadar limit belirlenmesidir."],
+            ["Veri madenciliği nedir?", "Büyük veri yığınları arasından değerli bilgileri keşfetme ve anlam çıkarma sürecidir."],
+            ["Sosyal medyada yayılan asılsız haberlere ne ad verilir?", "Dezenformasyon veya Fake News."],
+            ["E-ticarette 'Kullanıcı Yorumları' neden kritiktir?", "Potansiyel alıcılar için sosyal kanıt oluşturur ve güveni artırır."],
+            ["Web 2.0 kavramı neyi temsil eder?", "Kullanıcıların içerik üretebildiği ve etkileşime girebildiği sosyal internet dönemini."],
+            ["Veri görselleştirmede 'Kabarcık Grafiği' kaç boyutu gösterebilir?", "Üç boyutu (X, Y ve kabarcık boyutu)."],
+            ["Siber zorbalığın hukuki cezası var mıdır?", "Evet, Türk Ceza Kanunu kapsamında hakaret ve tehdit suçlarından cezası vardır."],
+            ["E-ticarette 'E-Fatura' sisteminin avantajı nedir?", "Kâğıt israfını önler, maliyetleri düşürür ve arşivlemeyi kolaylaştırır."],
+            ["Veri setindeki değişkenlerin dağılımını gösteren grafik türü hangisidir?", "Histogram."],
+            ["Sosyal medya algoritması nedir?", "Kullanıcıya ilgi duyabileceği içerikleri öncelikli gösteren matematiksel kurallar bütünüdür."],
+            ["İnternet dolandırıcılığına karşı alınacak en temel önlem nedir?", "Bilinçli kullanıcı olmak ve güvenlik yazılımları kullanmak."],
+            ["E-ticaret sitelerinde 'Ücretsiz Kargo' seçeneği satışları nasıl etkiler?", "Satış hacmini ve sepet tutarını artırıcı etkisi vardır."],
+            ["Bir veri setinde en sık tekrar eden değere ne ad verilir?", "Mod."],
+            ["Sosyal medyada gizlilik ayarlarının düzenli kontrol edilmesi neden önemlidir?", "Paylaşılan bilgilerin sadece istenilen kişilerce görülmesini sağlamak için."],
+            ["E-ticaretin temeli nedir?", "Kişilik haklarına saldırı ve bilişim suçları kapsamındaki yasalar."]
+        ];
+
+        let cur = 0; let sc = 0; let vAct = false;
+        function load() {
+            const q = allQuestions[cur];
+            document.getElementById('question').innerText = q[0];
+            document.getElementById('q-info').innerText = `Soru: ${cur + 1} / ${allQuestions.length}`;
+            if(vAct) talk(q[0]);
+            let opts = [q[1]];
+            let wrongs = allQuestions.map(x=>x[1]).filter(x=>x!==q[1]);
+            while(opts.length<4) {
+                let r = wrongs[Math.floor(Math.random()*wrongs.length)];
+                if(!opts.includes(r)) opts.push(r);
+            }
+            opts.sort(()=>Math.random()-0.5);
+            const box = document.getElementById('options'); box.innerHTML = '';
+            opts.forEach(o => {
+                const d = document.createElement('div'); d.className = 'option'; d.innerText = o;
+                d.onclick = () => {
+                    if(document.querySelector('.correct')) return;
+                    if(o===q[1]) { d.classList.add('correct'); sc+=10; if(vAct) talk("Doğru"); }
+                    else { d.classList.add('wrong'); if(vAct) talk("Yanlış. Doğru cevap: " + q[1]);
+                        Array.from(document.getElementsByClassName('option')).forEach(e=>{if(e.innerText===q[1]) e.classList.add('correct')});
+                    }
+                    setTimeout(()=>{ cur++; if(cur<allQuestions.length) load(); else { document.getElementById('quiz').style.display='none'; document.getElementById('result').style.display='block'; document.getElementById('finalScore').innerText=sc; } }, 2500);
+                };
+                box.appendChild(d);
+            });
+        }
+        function toggleV() { vAct=!vAct; const b=document.getElementById('vBtn'); b.innerText=vAct?"🔊 Ses: Açık":"🔇 Ses: Kapalı"; b.className=vAct?"btn-on":""; if(vAct) talk(allQuestions[cur][0]); else window.speechSynthesis.cancel(); }
+        function talk(t) { if(!vAct) return; window.speechSynthesis.cancel(); const m=new SpeechSynthesisUtterance(t); m.lang='tr-TR'; window.speechSynthesis.speak(m); }
+        load();
+    </script>
+</body>
+</html>
