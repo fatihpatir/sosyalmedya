@@ -2,178 +2,122 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Fatih PATIR | Sosyal Medya Dersi Portalı - Nene Hatun MTAL</title>
-    <meta name="description" content="Korkuteli Nene Hatun MTAL Bilişim Teknolojileri Öğretmeni Fatih PATIR tarafından hazırlanan, 81 kartlık Sosyal Medya Dersi çalışma portalı ve interaktif test sistemi.">
-    <meta name="keywords" content="Fatih Patir, Sosyal Medya Dersi, Nene Hatun MTAL, Bilişim Teknolojileri, Sosyal Medya Çalışma Soruları, Flashcards, Eğitim Portalı">
-    <meta name="author" content="Fatih PATIR">
-    <link rel="canonical" href="https://fatihpatir.github.io/web/" />
-
-    <meta property="og:title" content="Fatih PATIR - Sosyal Medya Dersi Portalı">
-    <meta property="og:description" content="81 kart ve dev test ile Sosyal Medya dersine etkileşimli hazırlık!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://fatihpatir.github.io/web/">
-    
-    <style>
-        :root {
-            --bg: #0f172a;
-            --primary: #6366f1;
-            --secondary: #a855f7;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --modal-bg: #1e293b;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: radial-gradient(circle at top left, #1e293b, #0f172a);
-            color: white;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Bilgi Butonu */
-        .info-btn {
-            position: fixed; top: 25px; right: 25px; width: 45px; height: 45px;
-            background: var(--card-bg); border: 2px solid var(--primary);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; font-weight: bold; font-size: 1.4rem; transition: 0.3s; z-index: 100;
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
-        }
-        .info-btn:hover { background: var(--primary); transform: rotate(15deg) scale(1.1); }
-
-        /* Modal Tasarımı */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
-            display: none; align-items: center; justify-content: center; z-index: 1000;
-        }
-
-        .modal-content {
-            background: var(--modal-bg); padding: 40px; border-radius: 35px;
-            max-width: 600px; width: 92%; border: 1px solid rgba(255,255,255,0.1);
-            position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.7);
-            max-height: 85vh; overflow-y: auto;
-        }
-
-        .modal-close { position: absolute; top: 20px; right: 25px; cursor: pointer; font-size: 2.2rem; color: #94a3b8; }
-
-        .install-box {
-            background: rgba(255,255,255,0.03); border-radius: 20px;
-            padding: 18px; margin-bottom: 18px; border-left: 5px solid var(--primary);
-        }
-
-        .install-box h4 { margin: 0 0 10px 0; display: flex; align-items: center; gap: 10px; color: var(--secondary); font-size: 1.1rem; }
-
-        /* Başlık Alanı */
-        header { text-align: center; margin-bottom: 50px; padding: 0 20px; }
-        .school-name { font-size: 0.85rem; letter-spacing: 5px; color: var(--primary); text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
-        .department-name { font-size: 1.1rem; color: #94a3b8; font-weight: 400; letter-spacing: 1px; }
-        .course-name { font-size: 3rem; margin: 15px 0; font-weight: 900; background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        /* Menü */
-        .menu-container { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; width: 100%; }
-        .menu-item {
-            background: var(--card-bg); border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 40px; padding: 50px 30px; width: 280px; text-align: center;
-            text-decoration: none; color: white; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(8px);
-        }
-        .menu-item:hover { transform: translateY(-20px); border-color: var(--primary); background: rgba(255,255,255,0.1); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-        .icon { font-size: 4.5rem; margin-bottom: 20px; display: block; filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.5)); }
-
-        /* İmza Alanı */
-        .designer-credit {
-            margin-top: 30px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-        }
-        .designer-title { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px; }
-        .designer-link {
-            color: #fff; text-decoration: none; font-weight: 800; font-size: 1.4rem;
-            display: inline-block; margin-top: 8px; transition: 0.3s;
-        }
-        .designer-link:hover { color: var(--primary); transform: scale(1.05); }
-        .designer-sub { font-size: 0.9rem; color: var(--secondary); margin-top: 5px; font-weight: 500; }
-
-        footer { position: fixed; bottom: 20px; font-size: 0.75rem; color: #475569; letter-spacing: 1px; }
-
-        ol { padding-left: 20px; margin: 0; font-size: 0.9rem; color: #cbd5e1; line-height: 1.6; }
-        li { margin-bottom: 6px; }
-
-        @media (max-width: 600px) {
-            .course-name { font-size: 2rem; }
-            .menu-item { width: 85%; padding: 35px 20px; }
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Sosyal Medya Akademisi</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#c13584">
 </head>
 <body>
+    <canvas id="confetti-canvas"></canvas>
+    <div id="achievement-toast">Yeni Rozet Kazanıldı! 🎖️</div>
 
-    <div class="info-btn" onclick="toggleModal(true)">i</div>
+    <div class="container">
+        <div class="top-bar">
+            <button class="icon-btn" onclick="app.showHome()">🏠</button>
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="SEO, SSL, Grafik..." oninput="app.search(this.value)">
+            </div>
+            <button class="icon-btn" onclick="app.toggleTheme()">📸</button>
+        </div>
 
-    <div class="modal-overlay" id="modal">
-        <div class="modal-content">
-            <span class="modal-close" onclick="toggleModal(false)">&times;</span>
-            <h2 style="margin-top:0; color: #fff; font-size: 1.8rem;">Sistem Rehberi</h2>
-            <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 30px;">
-                Bu uygulama, öğrencilerin Sosyal Medya dersi konularını daha hızlı ve kalıcı öğrenmesi için tasarlanmıştır.
-            </p>
+        <!-- Home View -->
+        <div id="view-home" class="view active">
+            <header>
+                <h1>Sosyal Medya</h1>
+                <p>STRATEGY & MANAGEMENT</p>
+            </header>
             
-            <div class="install-box">
-                <h4>📱 iPhone (Safari)</h4>
-                <ol>
-                    <li>Paylaş simgesine dokunun.</li>
-                    <li><b>"Ana Ekrana Ekle"</b> seçeneğini seçin.</li>
-                </ol>
+            <div id="exam-grid" class="grid">
+                <!-- Cards will be injected -->
             </div>
+        </div>
 
-            <div class="install-box">
-                <h4>🤖 Android (Chrome)</h4>
-                <ol>
-                    <li>Sağ üstteki <b>üç noktaya (⋮)</b> basın.</li>
-                    <li><b>"Uygulamayı Yükle"</b> butonuna dokunun.</li>
-                </ol>
+        <!-- Selection View -->
+        <div id="view-selection" class="view">
+            <header>
+                <h2 id="selected-title">Bölüm Detayları</h2>
+                <div class="badge-container" id="badges"></div>
+            </header>
+            
+            <div class="grid">
+                <div class="card glow-card" onclick="app.startSummary()" style="grid-column: 1 / -1; border-color: var(--primary); background: linear-gradient(135deg, rgba(193, 53, 132, 0.1), transparent);">
+                    <span class="card-icon">📖</span>
+                    <h3 class="card-title">Hızlı Konu Özeti</h3>
+                    <p class="card-desc">Sınav öncesi en kritik noktaları saniyeler içinde oku.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startStudy()">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Ders Notları</h3>
+                    <p class="card-desc">Tüm soruları ve detaylı cevapları incele.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startFlashcards()">
+                    <span class="card-icon">🎴</span>
+                    <h3 class="card-title">Terminoloji Kartları</h3>
+                    <p class="card-desc">Kavramları hızlı sileceklerle ezberle.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('tf')">
+                    <span class="card-icon">⚡</span>
+                    <h3 class="card-title">Reaksiyon Testi</h3>
+                    <p class="card-desc">Doğru/Yanlış oyunuyla hızını ölç.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('word')">
+                    <span class="card-icon">🧩</span>
+                    <h3 class="card-title">Kelime Avcısı</h3>
+                    <p class="card-desc">Sosyal medya terimlerini tahmin et.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('test')">
+                    <span class="card-icon">📝</span>
+                    <h3 class="card-title">Sınav Simülasyonu</h3>
+                    <p class="card-desc">10 soruluk gerçekçi bir test deneyimi.</p>
+                </div>
+                <div class="card glow-card" onclick="app.startGame('time')">
+                    <span class="card-icon">⏳</span>
+                    <h3 class="card-title">Saniyelerle Yarış</h3>
+                    <p class="card-desc">Süre bitmeden en yüksek skora ulaş.</p>
+                </div>
             </div>
+            
+            <div style="margin-top: 3rem; text-align: center;">
+                <button class="btn btn-secondary" onclick="app.printNotes()">🖨️ SINAV ÇALIŞMA KAĞIDI AL</button>
+            </div>
+        </div>
 
-            <div class="designer-credit">
-                <div class="designer-title">Tasarım & Yazılım</div>
-                <a href="https://fatihpatir.github.io/web" target="_blank" class="designer-link">Fatih PATIR</a>
-                <div class="designer-sub">Bilişim Teknolojileri Öğretmeni</div>
+        <!-- Content View -->
+        <div id="view-content" class="view">
+            <div class="nav-header">
+                <button class="btn" onclick="app.showSelection(app.activeExam)">⬅ Geri Dön</button>
+                <div id="game-status"></div>
             </div>
+            <div id="content-container"></div>
         </div>
     </div>
 
-    <header>
-        <div class="school-name">Korkuteli Nene Hatun MTAL</div>
-        <div class="department-name">Bilişim Teknolojileri Alanı</div>
-        <h1 class="course-name">Sosyal Medya Dersi</h1>
-    </header>
-
-    <div class="menu-container">
-        <a href="flashcard.html" class="menu-item">
-            <span class="icon">🎴</span>
-            <h3 style="font-size: 1.5rem; margin: 0;">Flashcards</h3>
-            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 10px;">81 Kartla Görsel Tekrar</p>
-        </a>
-
-        <a href="test.html" class="menu-item">
-            <span class="icon">📝</span>
-            <h3 style="font-size: 1.5rem; margin: 0;">Bilgi Testi</h3>
-            <p style="color: #94a3b8; font-size: 0.9rem; margin-top: 10px;">81 Soruluk Dev Sınav</p>
-        </a>
+    <!-- Modals -->
+    <div id="modal-result" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="app.closeModal()">&times;</span>
+            <div id="result-body"></div>
+        </div>
     </div>
 
-    <footer>&copy; 2024 Korkuteli Nene Hatun MTAL | Bilişim Teknolojileri</footer>
+    <div id="print-area"></div>
 
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 <a href="https://fatihpatir.github.io/web" target="_blank" class="footer-name">Fatih PATIR</a></p>
+            <p class="footer-location">Korkuteli / Antalya</p>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
     <script>
-        function toggleModal(show) {
-            document.getElementById('modal').style.display = show ? 'flex' : 'none';
-        }
-        window.onclick = function(e) {
-            if (e.target == document.getElementById('modal')) toggleModal(false);
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
         }
     </script>
 </body>
