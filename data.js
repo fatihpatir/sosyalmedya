@@ -2,7 +2,7 @@ const EXAM_DATA = [
   {
     id: '1-1',
     title: '1. Dönem 1. Sınav',
-    summary: '<b>E-Ticaret:</b> Mal/hizmet değişiminin internete taşınmasıdır. B2B, B2C ve C2C modelleri mevcuttur. <br><br><b>Güvenlik:</b> SSL sertifikaları veri şifreleme için zorunludur. İş planı, hedef kitle ve pazarlama stratejileri e-ticaretin temelidir.',
+    summary: '<b>Kapsam:</b> E-ticaret temel kavramları, iş planı, pazarlama ve teknik altyapı.<br><br><b>E-Ticaretin Özü:</b> Kazanç sağlamak amacıyla yapılan geleneksel ticaretin internet üzerine taşınmasıdır. Sadece ürün satmak değil, dijital ortamda ödeme almak ve müşteri hizmetleri sunmaktır.<br><br><b>İş Modelleri:</b> İşletmeler arası (B2B), işletmeden tüketiciye (B2C) ve tüketiciden tüketiciye (C2C) gibi modeller mevcuttur.<br><br><b>İş Planı Neden Önemli?:</b> Bir e-ticaret girişiminin yol haritasıdır. Hedef kitlenin kim olduğu, hangi bütçeyle hareket edileceği ve rakiplerin analizi bu planda yer alır.<br><br><b>Pazarlama Araçları:</b> SEO (arama motoru optimizasyonu) ile organik görünürlük sağlanırken, SEM (reklamlar) ve sosyal medya ile doğrudan hedef kitleye ulaşılır.<br><br><b>Güvenlik ve Altyapı:</b> Bir sitenin güvenliği için verileri şifreleyen SSL sertifikası olmazsa olmazdır. Ayrıca sunucu (hosting) seçimi sitenin hızı ve kesintisizliği için kritiktir.',
     questions: [
       { q: "E-ticaretin geleneksel ticarete göre en büyük avantajı nedir?", a: "7/24 kesintisiz satış ve coğrafi sınırları aşma imkanı." },
       { q: "B2B modeli nedir?", a: "İki işletme arasındaki ticari ilişkiyi ifade eder." },
@@ -36,12 +36,24 @@ const EXAM_DATA = [
       { front: "Lojistik", back: "Ürünün depolanması ve sevkiyat süreci." },
       { front: "SEM", back: "Arama motoru reklamcılığı." },
       { front: "Phishing", back: "Oltalama yoluyla veri hırsızlığı." }
+    ],
+    openEnded: [
+      { q: "Ticaret kavramını en temel haliyle nasıl tanımlarsınız?", a: "Ticaret; kazanç sağlamak amacıyla yapılan her türlü mal veya hizmetin alım satım işlemidir" },
+      { q: "E-ticaretin geleneksel ticarete göre sunduğu en büyük lojistik avantaj nedir?", a: "İnternetin yaygınlaşmasıyla birlikte ticaret, fiziksel sınırları aşarak çok daha uzak mesafelere ve kitlelere çok daha hızlı ulaşabilir hale gelmiştir" },
+      { q: "E-ticaretin işletmelere sağladığı avantajlardan iki tanesini belirtiniz.", a: "7/24 kesintisiz satış imkanı sunması ve operasyonel maliyetleri (fiziksel dükkan kirası vb.) azaltmasıdır" },
+      { q: "B2C (Business to Consumer) ticaret modeli nedir?", a: "İşletmelerin ürün veya hizmetlerini doğrudan son tüketiciye internet üzerinden satmasıdır" },
+      { q: "E-ticarette bir \"İş Planı\" hazırlamak neden gereklidir?", a: "Girişimin hedeflerini belirlemek, bütçe yönetimini sağlamak ve pazarlama stratejilerini doğru kurgulamak için gereklidir" },
+      { q: "Elektronik pazarlama yöntemlerinden iki tanesini yazınız.", a: "Sosyal medya reklamcılığı ve arama motoru optimizasyonu (SEO) en yaygın yöntemlerdendir" },
+      { q: "E-ticaret sitelerinde kullanılan teknik altyapı bileşenleri nelerdir?", a: "Sunucu (Server), alan adı (Domain), veri tabanı ve güvenlik yazılımları temel bileşenlerdir" },
+      { q: "E-ticarette karşılaşılan temel güvenlik tehditleri nelerdir?", a: "Phishing (oltalama), zararlı yazılımlar ve ödeme sistemlerine yönelik siber saldırılardır" },
+      { q: "Site içi güvenliği sağlamak için kullanılan SSL sertifikası ne işe yarar?", a: "Kullanıcı ile banka arasındaki veri trafiğini şifreleyerek üçüncü şahısların bilgilere erişmesini engeller" },
+      { q: "E-ticarette kullanılan en yaygın ödeme yöntemlerini sıralayınız.", a: "Kredi kartı, EFT/Havale ve kapıda ödeme sistemleridir" }
     ]
   },
   {
     id: '1-2',
     title: '1. Dönem 2. Sınav',
-    summary: '<b>Etik ve Güvenlik:</b> Sosyal medyada özel hayatın gizliliği ve dürüstlük esastır. <br><br><b>Siber Tehditler:</b> Siber zorbalık ve kişisel veri ihlallerine karşı 2FA (iki faktörlü doğrulama) ve güçlü şifreler kullanılmalıdır.',
+    summary: '<b>Kapsam:</b> Bilişim etiği, bilgi güvenliği, siber zorbalık ve dijital dönüşüm.<br><br><b>Dijital Etik:</b> İnternet üzerinde başkalarının haklarına saygı duymak, özel hayatın gizliliğini ihlal etmemek ve dürüst paylaşımlar yapmaktır.<br><br><b>Bilgi Güvenliği:</b> Kişisel verilerin (TC kimlik, adres, şifre) kötü niyetli kişilerin eline geçmesini engellemek için alınan teknik ve hukuki önlemlerdir.<br><br><b>Siber Zorbalıkla Mücadele:</b> Dijital mecralarda yapılan hakaret veya tehditlere karşı güvenlik yazılımları (antivirüs vb.) kullanmak ve saldırganları engellemek hayati önem taşır.<br><br><b>Dijital Marka ve Dönüşüm:</b> Şirketlerin teknolojiye ayak uydurarak iş süreçlerini dijitalleştirmesi (Dijital Dönüşüm) ve internetteki itibarlarını yönetmeleridir (Marka Yönetimi).',
     questions: [
       { q: "Bilişim etiğinin temel amacı nedir?", a: "Teknoloji kullanımında hak ve özgürlüklere saygılı bir ortam yaratmak." },
       { q: "Siber zorbalığa maruz kalan bir öğrenci ne yapmalıdır?", a: "Zorbalığı yapanı engellemeli ve durumu güvenilir bir yetişkine bildirmelidir." },
@@ -75,12 +87,24 @@ const EXAM_DATA = [
       { front: "Gizlilik", back: "Özel hayatın korunması prensibi." },
       { front: "Siber Şiddet", back: "Dijital ortamda hakaret veya tehdit." },
       { front: "Dijital Kimlik", back: "Kişinin sanal dünyadaki varlığı." }
+    ],
+    openEnded: [
+      { q: "\"Bilişim Etiği\" kavramı genel olarak neleri kapsar?", a: "Bilişim teknolojilerinin kullanımında uyulması gereken ahlaki kuralları, hak ve özgürlükleri kapsar" },
+      { q: "Sosyal medyada paylaşım yaparken dikkat edilmesi gereken temel etik kural nedir?", a: "Başkalarının özel hayatına saygı göstermek ve dürüst içerikler paylaşmaktır" },
+      { q: "\"Bilgi Güvenliği\" kavramının temel amacı nedir?", a: "Kişisel veya kurumsal verilerin izinsiz erişim, kullanım veya değiştirilmeye karşı korunmasıdır" },
+      { q: "Siber zorbalık nedir? Kısaca açıklayınız.", a: "Dijital platformlar üzerinden bir bireye veya gruba yönelik yapılan hakaret, tehdit veya dışlama gibi kasıtlı saldırgan davranışlardır" },
+      { q: "Siber şiddete maruz kalan bir birey kendini korumak için ilk olarak ne yapmalıdır?", a: "Zorbalık yapan kişiyi engellemeli, durumu sosyal medya platformuna raporlamalı ve gerekirse yasal mercilere başvurmalıdır" },
+      { q: "Sosyal medya kullanımında hukuki sorumluluklar neden önemlidir?", a: "Yapılan paylaşımların yasal çerçevede suç teşkil edebileceği ve tazminat gibi sonuçlar doğurabileceği unutulmamalıdır" },
+      { q: "Dijital marka yönetimi şirketler için neden bir zorunluluk haline gelmiştir?", a: "Markanın internetteki itibarını korumak ve hedef kitleyle doğrudan iletişim kurabilmek için hayati önem taşır" },
+      { q: "Dijital dönüşüm kavramını kısaca açıklayınız.", a: "Teknolojinin tüm iş süreçlerine ve toplumsal alanlara entegre edilerek daha verimli sistemler oluşturulmasıdır" },
+      { q: "\"Netiquette\" (İnternet nezaketi) neyi ifade eder?", a: "İnternet ortamında diğer kullanıcılarla iletişim kurarken gösterilmesi gereken nezaket ve saygı kurallarını ifade eder" },
+      { q: "Sosyal medyada kimlik gizlemeden (anonim kalmadan) paylaşım yapmanın avantajı nedir?", a: "Paylaşımların güvenilirliğini artırır ve kullanıcıyı hukuki sorumluluklarına karşı daha bilinçli hale getirir" }
     ]
   },
   {
     id: '2-1',
     title: '2. Dönem 1. Sınav',
-    summary: '<b>Yönetim:</b> İçerik planı, takvim ve hedef kitle tespiti sosyal medyanın bel kemiğidir. <br><br><b>Analiz:</b> Etkileşim, erişim ve gösterim gibi metrikler raporlanır. Kriz anlarında şeffaf bir iletişim stratejisi uygulanır.',
+    summary: '<b>Kapsam:</b> İçerik planlama, analiz, kriz yönetimi ve verinin anlamlandırılması.<br><br><b>İçerik Planlama Süreci:</b> Önce hedef kitle belirlenir, ardından içeriğin kategorisi (eğitim, reklam, eğlence) seçilir ve bir içerik takvimi ile ne zaman paylaşılacağı şemalaştırılır.<br><br><b>Analiz ve Raporlama:</b> Paylaşımların kaç kişiye ulaştığı (erişim) ve kaç kişinin beğendiği/yorum yaptığı (etkileşim) gibi metrikler incelenerek strateji geliştirilir.<br><br><b>Kriz İletişimi:</b> Sosyal medyada oluşan olumsuz durumları veya yanlış anlamaları yönetmek için önceden hazırlanan eylem planlarıdır.<br><br><b>Veri Hiyerarşisi:</b><br>• <b>Veri (Data):</b> İşlenmemiş ham rakamlar veya sembollerdir.<br>• <b>Enformasyon:</b> Verinin anlam kazanmış, düzenlenmiş halidir.<br>• <b>Bilgi:</b> Enformasyonun deneyimle harmanlanarak bir faydaya dönüşmesidir.',
     questions: [
       { q: "Bir içerik planı takviminde neler yer almalıdır?", a: "Paylaşım tarihi, saati, kanal ismi, içerik metni ve görseli." },
       { q: "Hedef kitle tespiti neden yapılır?", a: "İçeriğin doğru kişilere ulaşmasını sağlayarak verimliliği artırmak için." },
@@ -114,12 +138,24 @@ const EXAM_DATA = [
       { front: "Takipçi Artışı", back: "Kitle büyüme hızı." },
       { front: "Tıklama (CTR)", back: "Bağlantılara tıklanma oranı." },
       { front: "Mentions", back: "Markadan bahsedilme sayısı." }
+    ],
+    openEnded: [
+      { q: "Sosyal medya yönetiminde \"Yardımcı Araçlar\" hangi amaçla kullanılır?", a: "Paylaşımları zamanlamak, performans analizlerini takip etmek ve etkileşimi yönetmek için kullanılır" },
+      { q: "İçerik planı oluştururken \"Hedef Kitle Tespiti\" neden ilk adımdır?", a: "Paylaşılacak içeriğin dilini, görsel tarzını ve yayın saatini doğru belirleyebilmek için kime hitap edildiği bilinmelidir" },
+      { q: "Sosyal medya platformlarında \"İçerik Kategorileri\" oluşturmanın faydası nedir?", a: "Sayfanın içerik çeşitliliğini sağlar ve takipçilerin ilgi alanlarına göre düzenli bir akış sunar" },
+      { q: "Bir sosyal medya içerik takviminde mutlaka bulunması gereken bilgiler nelerdir?", a: "Yayın tarihi, saati, hangi platformda paylaşılacağı ve içeriğin konusu yer almalıdır" },
+      { q: "Sosyal medya analiz ve raporlaması işletmeye ne kazandırır?", a: "Hangi içeriklerin daha çok sevildiğini anlamayı ve gelecekteki stratejileri veriye dayalı geliştirmeyi sağlar" },
+      { q: "Sosyal medyada \"Kriz İletişimi\" süreci nasıl yönetilmelidir?", a: "Hızlı, şeffaf ve dürüst bir resmi açıklama yapılarak krizin kaynağına yönelik çözüm üretilmelidir" },
+      { q: "Veri (Data) ile Enformasyon arasındaki fark nedir?", a: "Veri henüz işlenmemiş ham değerdir; enformasyon ise bu verilerin düzenlenmiş ve anlamlandırılmış halidir" },
+      { q: "\"Bilgi\" (Knowledge) kavramını veri hiyerarşisindeki yerine göre açıklayınız.", a: "Bilgi; enformasyonun deneyim ve uygulama ile sentezlenerek bir amaç için kullanılabilir hale gelmiş halidir" },
+      { q: "Sosyal medya raporlarında kullanılan \"Etkileşim Oranı\" metriği neyi ölçer?", a: "Beğeni, yorum ve paylaşım gibi kullanıcı tepkilerinin toplam erişime oranını ölçer" },
+      { q: "Bir kriz anında örnek olay analizi yapmanın önemi nedir?", a: "Geçmiş hatalardan ders çıkarılmasını ve benzer durumlar için hazırlıklı olunmasını sağlar" }
     ]
   },
   {
     id: '2-2',
     title: '2. Dönem 2. Sınav',
-    summary: '<b>Görselleştirme:</b> Verilerin hızlı anlaşılması için grafikler kullanılır. <br><br><b>Grafik Türleri:</b> Zaman için Çizgi, karşılaştırma için Sütun, oranlar için Pasta grafik tercih edilir. Radar ve Huni gibi gelişmiş türler de vardır.',
+    summary: '<b>Kapsam:</b> Veri türleri, toplama yöntemleri ve grafik çeşitleri.<br><br><b>Veri Süreci:</b> Veriler anket veya gözlem yoluyla toplanır (Toplama), hatalardan arındırılarak tablolaştırılır (Hazırlama) ve son aşamada grafiklere dökülür (Görselleştirme).<br><br><b>Grafik Seçimi:</b><br>• Karşılaştırma için sütun ve çubuk grafikler.<br>• Zaman içindeki değişim (trend) için çizgi grafikler.<br>• Oransal dağılım (bir bütünün parçaları) için pasta ve halka grafikler.<br><br><b>İleri Seviye Görselleştirme:</b> Birden fazla değişkeni kıyaslamak için Radar, hiyerarşiyi göstermek için Ağaç Haritası veya Güneş Işığı, süreçlerdeki kaybı görmek için Huni grafikleri kullanılır.<br><br><b>Amaç:</b> Karmaşık sayı yığınlarını herkesin anlayabileceği, hızlı ve etkileyici görsellere dönüştürerek doğru kararlar almayı sağlamaktır.',
     questions: [
       { q: "Zaman içindeki satış değişimini en iyi hangi grafik gösterir?", a: "Çizgi grafik." },
       { q: "Histogram grafiği hangi amaçla kullanılır?", a: "Verilerin sıklığını (dağılımını) göstermek için." },
@@ -153,6 +189,18 @@ const EXAM_DATA = [
       { front: "Veri Temizleme", back: "Hatalı veya eksik verilerin ayıklanması." },
       { front: "Veri Analizi", back: "Veriden anlam çıkarma süreci." },
       { front: "Grafik Seçimi", back: "Veriye uygun görsel türünü belirleme." }
+    ],
+    openEnded: [
+      { q: "Veri toplama yöntemlerinden üç tanesini yazınız.", a: "Anket, gözlem ve internet tabanlı istatistik araçları en yaygın yöntemlerdir" },
+      { q: "\"Veri Hazırlama\" aşamasında neden tablolar kullanılır?", a: "Ham verileri temizleyip sınıflandırarak grafik oluşturmaya hazır, düzenli bir yapı kurmak için kullanılır" },
+      { q: "Sütun ve Çubuk grafikler hangi durumlarda tercih edilmelidir?", a: "Farklı kategoriler arasındaki değerleri birbiriyle kıyaslamak için tercih edilir" },
+      { q: "Çizgi grafiklerin veri analizindeki en temel kullanım amacı nedir?", a: "Belirli bir zaman aralığındaki (yıllar, aylar vb.) değişimleri ve eğilimleri (trendleri) göstermektir" },
+      { q: "Pasta ve Halka grafikler verinin hangi özelliğini vurgular?", a: "Bir bütünün parçalarını ve bu parçaların toplam içindeki oranlarını vurgular" },
+      { q: "\"Radar Grafikleri\" ne zaman kullanılır?", a: "Birden fazla değişkenin (örneğin bir sporcunun farklı yetenekleri) performansını aynı anda kıyaslamak için kullanılır" },
+      { q: "Histogram grafiği ile Sütun grafik arasındaki fark nedir?", a: "Sütun grafiği kategorileri kıyaslarken, histogram verilerin belirli sayısal aralıklardaki (0-100 puan arası gibi) dağılım sıklığını gösterir" },
+      { q: "\"Ağaç Haritası\" (Treemap) grafiğinin özelliği nedir?", a: "Hiyerarşik verileri iç içe geçmiş dikdörtgen alanlarla görselleştirerek büyüklük kıyası yapmayı sağlar" },
+      { q: "\"Güneş Işığı\" (Sunburst) grafiği hangi amaçla kullanılır?", a: "Hiyerarşik verileri halkalar şeklinde göstererek her bir alt kategorinin ana kategori içindeki yerini göstermek için kullanılır" },
+      { q: "Bileşik grafikler (Combo Charts) hangi ihtiyacı karşılar?", a: "Aynı anda iki farklı veri türünü (örneğin hem miktar hem oran) tek bir grafikte farklı eksenlerle göstermeyi sağlar" }
     ]
   }
 ];
