@@ -159,12 +159,13 @@ footer {
 
 #confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 5000; }
 #achievement-toast {
-  position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(120px);
+  position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(250px);
   background: var(--grad); color: #fff; padding: 1.2rem 2.5rem; border-radius: 4rem;
-  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 2000;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.6s; z-index: 2000;
   font-weight: 700; box-shadow: 0 10px 30px var(--primary-glow);
+  opacity: 0; pointer-events: none;
 }
-#achievement-toast.show { transform: translateX(-50%) translateY(0); }
+#achievement-toast.show { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
 
 #print-area { display: none; }
 

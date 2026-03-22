@@ -4,9 +4,49 @@ const app = {
   timer: null,
   timeLeft: 0,
   progress: JSON.parse(localStorage.getItem('sosyal_progress')) || {},
+  soundEnabled: JSON.parse(localStorage.getItem('sosyal_sound')) !== false,
+  audioCtx: null,
   
   init() {
+    this.initAudio();
     this.renderHome();
+  },
+
+  initAudio() {
+    this.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    this.updateSoundBtn();
+  },
+
+  playTone(freq, type, duration, vol = 0.1) {
+    if (!this.soundEnabled || !this.audioCtx) return;
+    if (this.audioCtx.state === 'suspended') this.audioCtx.resume();
+    const osc = this.audioCtx.createOscillator();
+    const gain = this.audioCtx.createGain();
+    osc.type = type; osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
+    gain.gain.setValueAtTime(vol, this.audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, this.audioCtx.currentTime + duration);
+    osc.connect(gain); gain.connect(this.audioCtx.destination);
+    osc.start(); osc.stop(this.audioCtx.currentTime + duration);
+  },
+
+  playSound(type) {
+    switch(type) {
+      case 'click': this.playTone(800, 'sine', 0.1, 0.05); break;
+      case 'success': this.playTone(600, 'sine', 0.1); setTimeout(() => this.playTone(900, 'sine', 0.2), 100); break;
+      case 'fail': this.playTone(300, 'sawtooth', 0.2, 0.05); setTimeout(() => this.playTone(200, 'sawtooth', 0.3, 0.05), 150); break;
+      case 'win': [440, 554, 659, 880].forEach((f, i) => setTimeout(() => this.playTone(f, 'sine', 0.4, 0.1), i * 150)); break;
+    }
+  },
+
+  toggleSound() {
+    this.soundEnabled = !this.soundEnabled;
+    localStorage.setItem('sosyal_sound', this.soundEnabled);
+    this.updateSoundBtn(); if (this.soundEnabled) this.playSound('click');
+  },
+
+  updateSoundBtn() {
+    const btn = document.getElementById('btn-sound');
+    if (btn) btn.innerText = this.soundEnabled ? '🔊' : '🔇';
   },
 
   renderHome() {
@@ -37,6 +77,7 @@ const app = {
   },
 
   showView(id) {
+    this.playSound('click');
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     window.scrollTo(0,0);
@@ -112,7 +153,7 @@ const app = {
     c.innerHTML = `<div class="game-container"><h3>Doğrulama Kontrolü</h3><div class="q-card" style="margin-top:2rem;"><p class="q-text">${q.q}</p><p class="a-text" style="color:var(--accent); font-weight:700;">Bilgi: ${ans}</p></div><div style="display:flex; gap:1.5rem; justify-content:center; margin-top:2.5rem;"><button class="btn" onclick="app.checkTF(true, ${ans === q.a})">DOĞRU</button><button class="btn btn-secondary" onclick="app.checkTF(false, ${ans === q.a})">YANLIŞ</button></div></div>`;
   },
 
-  checkTF(p, c) { if(p === c) { this.score++; this.playTF(); } else this.endGame('Engagement Lost!', `Skor: ${this.score}`); },
+  checkTF(p, c) { if(p === c) { this.playSound('success'); this.score++; this.playTF(); } else { this.playSound('fail'); this.endGame('Engagement Lost!', `Skor: ${this.score}`); } },
 
   playWord() {
     const q = this.activeExam.questions[Math.floor(Math.random()*this.activeExam.questions.length)];
@@ -123,12 +164,14 @@ const app = {
   },
 
   guess(l, w, b) {
+    this.playSound('click');
     b.classList.add('used');
     const box = document.getElementById('word-box');
     let curr = box.innerText.split('');
     w.split('').forEach((c, i) => { if(c === l) { curr[i] = l; } });
     box.innerText = curr.join('');
-    if(!curr.includes('_')) { this.saveProgress('game'); this.endGame('Viral Başarı!', `Kelime: ${w}`); this.triggerConfetti(); }
+    if(!curr.includes('_')) { this.playSound('win'); this.saveProgress('game'); this.endGame('Viral Başarı!', `Kelime: ${w}`); this.triggerConfetti(); }
+    else if(!w.includes(l)) { this.playSound('fail'); } else { this.playSound('success'); }
   },
 
   playTime() {
@@ -148,13 +191,14 @@ const app = {
     c.innerHTML = `<div class="game-container"><div class="q-card"><p class="q-text">${q.q}</p></div><div style="display:grid; gap:12px; margin-top:1.5rem;">${opts.map(o => `<button class="btn btn-secondary" onclick="app.checkTimeQ('${o}','${q.a}')">${o}</button>`).join('')}</div></div>`;
   },
 
-  checkTimeQ(p, c) { if(p === c) this.score++; this.nextTimeQ(); },
+  checkTimeQ(p, c) { if(p === c) { this.playSound('success'); this.score++; } else { this.playSound('fail'); } this.nextTimeQ(); },
 
   endGame(t, m) {
     clearInterval(this.timer);
     document.getElementById('game-status').innerText = '';
     const b = document.getElementById('result-body');
     b.innerHTML = `<h2 style="color:var(--primary); margin-bottom:1.5rem;">${t}</h2><p style="font-size:1.8rem; margin-bottom:2.5rem; font-weight:700;">${m}</p><button class="btn" onclick="app.closeModal()">KAPAT</button>`;
+    if(t.includes('Viral') || t.includes('Loss') || t.includes('Time')) this.playSound('win');
     document.getElementById('modal-result').classList.add('active');
   },
 
@@ -228,6 +272,7 @@ const app = {
   },
 
   toggleTheme() {
+    this.playSound('click');
     document.body.style.filter = document.body.style.filter === 'sepia(1)' ? 'none' : 'sepia(1)';
   },
 
